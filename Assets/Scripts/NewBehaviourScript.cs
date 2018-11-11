@@ -7,11 +7,21 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject DesignTemplate;
     private Vector3 _size;
 
-
-    private void Awake()
+    private Vector3 GetObjectSize(GameObject go)
     {
-//        _size = DesignTemplate.transform.GetComponent<MeshFilter>().mesh.bounds.size;
-        _size = new Vector3(0.05207656f, 0.06724269f, 0.03182981f);
+        var realSize = Vector3.zero;
+
+        var mesh = go.GetComponent<MeshFilter>().sharedMesh;
+        if (mesh == null)
+        {
+            return realSize;
+        }
+
+        var meshSize = mesh.bounds.size;
+        var scale = transform.lossyScale;
+        realSize = new Vector3(meshSize.x * scale.x, meshSize.y * scale.y, meshSize.z * scale.z);
+
+        return realSize;
     }
 
     /// <summary>
@@ -24,17 +34,15 @@ public class NewBehaviourScript : MonoBehaviour
             for (var j = 0; j < 2; ++j)
             {
                 var card = Instantiate(DesignTemplate);
+                if (_size == Vector3.zero)
+                {
+                    _size = GetObjectSize(card);
+                }
+
                 var startPosition = DesignTemplate.transform.position;
-                card.transform.position = new Vector3(startPosition.x + _size.x * 0.5f + i * _size.x, startPosition.y,
-                    startPosition.z);
+                card.transform.position = new Vector3(startPosition.x, startPosition.y,
+                    startPosition.z + i * _size.x);
             }
         }
-    }
-
-    /// <summary>
-    /// Update is called once per frame
-    /// </summary>
-    private void Update()
-    {
     }
 }
