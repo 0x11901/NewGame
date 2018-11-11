@@ -29,7 +29,7 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        for (var i = 0; i < 18; ++i)
+        for (var i = 0; i < 15; ++i)
         {
             for (var j = 0; j < 2; ++j)
             {
@@ -40,7 +40,7 @@ public class NewBehaviourScript : MonoBehaviour
                 }
 
                 var startPosition = DesignTemplate.transform.position;
-                card.transform.position = new Vector3(startPosition.x, startPosition.y,
+                card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
                     startPosition.z + i * _size.x);
             }
         }
