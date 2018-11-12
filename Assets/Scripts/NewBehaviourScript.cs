@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    public GameObject DesignTemplate;
+    public GameObject DesignTemplateLeft;
+
     private Vector3 _size;
 
     private Vector3 GetObjectSize(GameObject go)
@@ -33,13 +32,29 @@ public class NewBehaviourScript : MonoBehaviour
         {
             for (var j = 0; j < 2; ++j)
             {
-                var card = Instantiate(DesignTemplate);
+                var card = Instantiate(DesignTemplateLeft);
                 if (_size == Vector3.zero)
                 {
                     _size = GetObjectSize(card);
                 }
 
-                var startPosition = DesignTemplate.transform.position;
+                var startPosition = DesignTemplateLeft.transform.position;
+                card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
+                    startPosition.z + i * _size.x);
+            }
+        }
+
+        for (var i = 0; i < 15; ++i)
+        {
+            for (var j = 0; j < 2; ++j)
+            {
+                var card = Instantiate(DesignTemplateLeft);
+                if (_size == Vector3.zero)
+                {
+                    _size = GetObjectSize(card);
+                }
+
+                var startPosition = DesignTemplateLeft.transform.position;
                 card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
                     startPosition.z + i * _size.x);
             }

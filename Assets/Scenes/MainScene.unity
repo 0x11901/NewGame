@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d04d3173b554bccadffd79e8ece13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DesignTemplate: {fileID: 1641777922656302, guid: 06e493d00b76f44baa76e12e2fd6e57e,
+  DesignTemplateLeft: {fileID: 1641777922656302, guid: 06e493d00b76f44baa76e12e2fd6e57e,
     type: 2}
 --- !u!4 &810238386
 Transform:
