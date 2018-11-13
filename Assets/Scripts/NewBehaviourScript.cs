@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    public GameObject DesignTemplateLeft;
+    [SerializeField] private GameObject _designTemplateLeft;
+    [SerializeField] private GameObject _designTemplateTop;
+    [SerializeField] private GameObject _designTemplateRight;
+    [SerializeField] private GameObject _designTemplateSelf;
 
     private Vector3 _size;
 
@@ -32,13 +36,13 @@ public class NewBehaviourScript : MonoBehaviour
         {
             for (var j = 0; j < 2; ++j)
             {
-                var card = Instantiate(DesignTemplateLeft);
+                var card = Instantiate(_designTemplateLeft);
                 if (_size == Vector3.zero)
                 {
                     _size = GetObjectSize(card);
                 }
 
-                var startPosition = DesignTemplateLeft.transform.position;
+                var startPosition = _designTemplateLeft.transform.position;
                 card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
                     startPosition.z + i * _size.x);
             }
@@ -48,15 +52,47 @@ public class NewBehaviourScript : MonoBehaviour
         {
             for (var j = 0; j < 2; ++j)
             {
-                var card = Instantiate(DesignTemplateLeft);
+                var card = Instantiate(_designTemplateTop);
                 if (_size == Vector3.zero)
                 {
                     _size = GetObjectSize(card);
                 }
 
-                var startPosition = DesignTemplateLeft.transform.position;
+                var startPosition = _designTemplateTop.transform.position;
+                card.transform.position = new Vector3(startPosition.x - i * _size.x, startPosition.y + j * _size.y,
+                    startPosition.z);
+            }
+        }
+
+        for (var i = 0; i < 15; ++i)
+        {
+            for (var j = 0; j < 2; ++j)
+            {
+                var card = Instantiate(_designTemplateRight);
+                if (_size == Vector3.zero)
+                {
+                    _size = GetObjectSize(card);
+                }
+
+                var startPosition = _designTemplateRight.transform.position;
                 card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
-                    startPosition.z + i * _size.x);
+                    startPosition.z - i * _size.x);
+            }
+        }
+
+        for (var i = 0; i < 15; ++i)
+        {
+            for (var j = 0; j < 2; ++j)
+            {
+                var card = Instantiate(_designTemplateSelf);
+                if (_size == Vector3.zero)
+                {
+                    _size = GetObjectSize(card);
+                }
+
+                var startPosition = _designTemplateSelf.transform.position;
+                card.transform.position = new Vector3(startPosition.x + i * _size.x, startPosition.y + j * _size.y,
+                    startPosition.z);
             }
         }
     }

@@ -496,7 +496,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d04d3173b554bccadffd79e8ece13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DesignTemplateLeft: {fileID: 1641777922656302, guid: 06e493d00b76f44baa76e12e2fd6e57e,
+  _designTemplateLeft: {fileID: 1641777922656302, guid: 06e493d00b76f44baa76e12e2fd6e57e,
+    type: 2}
+  _designTemplateTop: {fileID: 1455418596702884, guid: c6f2af6157f594825a3700290ef0a778,
+    type: 2}
+  _designTemplateRight: {fileID: 1693711627191376, guid: 96b9d4278479546309ce80b28e8cf6e5,
+    type: 2}
+  _designTemplateSelf: {fileID: 1967608136329912, guid: 8c7b9bfc19a9d40da8e6f5861bc8ac39,
     type: 2}
 --- !u!4 &810238386
 Transform:
