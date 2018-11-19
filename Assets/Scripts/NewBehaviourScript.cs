@@ -8,6 +8,8 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject _designTemplateRight;
     [SerializeField] private GameObject _designTemplateSelf;
 
+    private byte _no;
+
     private Vector3 _size;
 
     private Vector3 GetObjectSize(GameObject go)
@@ -42,6 +44,8 @@ public class NewBehaviourScript : MonoBehaviour
                     _size = GetObjectSize(card);
                 }
 
+//                card.tag = _no
+
                 var startPosition = _designTemplateLeft.transform.position;
                 card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
                     startPosition.z + i * _size.x);
@@ -59,7 +63,7 @@ public class NewBehaviourScript : MonoBehaviour
                 }
 
                 var startPosition = _designTemplateTop.transform.position;
-                card.transform.position = new Vector3(startPosition.x - i * _size.x, startPosition.y + j * _size.y,
+                card.transform.position = new Vector3(startPosition.x + i * _size.x, startPosition.y + j * _size.y,
                     startPosition.z);
             }
         }
@@ -91,7 +95,7 @@ public class NewBehaviourScript : MonoBehaviour
                 }
 
                 var startPosition = _designTemplateSelf.transform.position;
-                card.transform.position = new Vector3(startPosition.x + i * _size.x, startPosition.y + j * _size.y,
+                card.transform.position = new Vector3(startPosition.x - i * _size.x, startPosition.y + j * _size.y,
                     startPosition.z);
             }
         }
