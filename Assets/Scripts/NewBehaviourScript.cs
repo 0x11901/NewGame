@@ -1,5 +1,6 @@
 ﻿using System;
-using Boo.Lang;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -123,6 +124,54 @@ public class NewBehaviourScript : MonoBehaviour
 
                 _riverCard.Add(card);
             }
+        }
+
+        StartCoroutine(Foo());
+    }
+
+    private IEnumerator Foo()
+    {
+        yield return new WaitForSeconds(1);
+        _total = 84;
+        ShowHands();
+    }
+
+    private void ShowHands()
+    {
+        for (var i = 0; i < 13; ++i)
+        {
+            var card = Instantiate(_handsLeft);
+            if (_size == Vector3.zero)
+            {
+                _size = GetObjectSize(card);
+            }
+
+            var startPosition = _handsLeft.transform.position;
+            card.transform.position = new Vector3(startPosition.x, startPosition.y, startPosition.z - i * _size.x);
+        }
+
+        for (var i = 0; i < 13; ++i)
+        {
+            var card = Instantiate(_handsTop);
+            if (_size == Vector3.zero)
+            {
+                _size = GetObjectSize(card);
+            }
+
+            var startPosition = _handsTop.transform.position;
+            card.transform.position = new Vector3(startPosition.x - i * _size.x, startPosition.y, startPosition.z);
+        }
+
+        for (var i = 0; i < 13; ++i)
+        {
+            var card = Instantiate(_handsRight);
+            if (_size == Vector3.zero)
+            {
+                _size = GetObjectSize(card);
+            }
+
+            var startPosition = _handsRight.transform.position;
+            card.transform.position = new Vector3(startPosition.x, startPosition.y, startPosition.z + i * _size.x);
         }
     }
 

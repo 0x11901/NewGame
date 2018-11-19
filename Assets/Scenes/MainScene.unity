@@ -526,9 +526,10 @@ MonoBehaviour:
     type: 2}
   _designTemplateSelf: {fileID: 1967608136329912, guid: 8c7b9bfc19a9d40da8e6f5861bc8ac39,
     type: 2}
-  _handsLeft: {fileID: 0}
-  _handsTop: {fileID: 0}
-  _handsRight: {fileID: 0}
+  _handsLeft: {fileID: 1524809399963192, guid: 4380f7abe2f2a4bd6aa610707510e943, type: 2}
+  _handsTop: {fileID: 1234238826395258, guid: 2273f79fd34e342a9b48aa2adc50884e, type: 2}
+  _handsRight: {fileID: 1867034873880250, guid: 7ca62d105482b4672b342c5fde2767b3,
+    type: 2}
 --- !u!4 &810238386
 Transform:
   m_ObjectHideFlags: 0
