@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Boo.Lang;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 public class NewBehaviourScript : MonoBehaviour
@@ -8,9 +10,10 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject _designTemplateRight;
     [SerializeField] private GameObject _designTemplateSelf;
 
-    private byte _no;
-
     private Vector3 _size;
+    private byte _no;
+    private byte _total;
+    private List<GameObject> _riverCard;
 
     private Vector3 GetObjectSize(GameObject go)
     {
@@ -29,6 +32,14 @@ public class NewBehaviourScript : MonoBehaviour
         return realSize;
     }
 
+    private void Awake()
+    {
+        _total = 136;
+        _total = 35;
+        _no = 0;
+        _riverCard = new List<GameObject>(120);
+    }
+
     /// <summary>
     /// Use this for initialization
     /// </summary>
@@ -44,11 +55,13 @@ public class NewBehaviourScript : MonoBehaviour
                     _size = GetObjectSize(card);
                 }
 
-//                card.tag = _no
+                card.name = (++_no).ToString();
 
                 var startPosition = _designTemplateLeft.transform.position;
                 card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
                     startPosition.z + i * _size.x);
+
+                _riverCard.Add(card);
             }
         }
 
@@ -62,9 +75,13 @@ public class NewBehaviourScript : MonoBehaviour
                     _size = GetObjectSize(card);
                 }
 
+                card.name = (++_no).ToString();
+
                 var startPosition = _designTemplateTop.transform.position;
                 card.transform.position = new Vector3(startPosition.x + i * _size.x, startPosition.y + j * _size.y,
                     startPosition.z);
+
+                _riverCard.Add(card);
             }
         }
 
@@ -78,9 +95,13 @@ public class NewBehaviourScript : MonoBehaviour
                     _size = GetObjectSize(card);
                 }
 
+                card.name = (++_no).ToString();
+
                 var startPosition = _designTemplateRight.transform.position;
                 card.transform.position = new Vector3(startPosition.x, startPosition.y + j * _size.y,
                     startPosition.z - i * _size.x);
+
+                _riverCard.Add(card);
             }
         }
 
@@ -94,9 +115,27 @@ public class NewBehaviourScript : MonoBehaviour
                     _size = GetObjectSize(card);
                 }
 
+                card.name = (++_no).ToString();
+
                 var startPosition = _designTemplateSelf.transform.position;
                 card.transform.position = new Vector3(startPosition.x - i * _size.x, startPosition.y + j * _size.y,
                     startPosition.z);
+
+                _riverCard.Add(card);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
+    private void Update()
+    {
+        foreach (var card in _riverCard)
+        {
+            if (byte.Parse(card.name) > _total)
+            {
+                card.SetActive(false);
             }
         }
     }
