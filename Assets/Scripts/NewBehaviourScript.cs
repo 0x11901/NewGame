@@ -10,6 +10,10 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject _designTemplateRight;
     [SerializeField] private GameObject _designTemplateSelf;
 
+    [SerializeField] private GameObject _handsLeft;
+    [SerializeField] private GameObject _handsTop;
+    [SerializeField] private GameObject _handsRight;
+
     private Vector3 _size;
     private byte _no;
     private byte _total;
@@ -35,15 +39,11 @@ public class NewBehaviourScript : MonoBehaviour
     private void Awake()
     {
         _total = 136;
-        _total = 35;
         _no = 0;
         _riverCard = new List<GameObject>(120);
     }
 
-    /// <summary>
-    /// Use this for initialization
-    /// </summary>
-    private void Start()
+    public void ShowRiver()
     {
         for (var i = 0; i < 15; ++i)
         {
@@ -124,6 +124,13 @@ public class NewBehaviourScript : MonoBehaviour
                 _riverCard.Add(card);
             }
         }
+    }
+
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    private void Start()
+    {
     }
 
     /// <summary>
