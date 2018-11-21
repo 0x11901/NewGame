@@ -154,7 +154,7 @@ public class NewBehaviourScript : MonoBehaviour
         var rand = new System.Random();
         var index = rand.Next(_cards.Count);
         var any = _cards[index];
-        var card = Instantiate(Resources.Load(any.ToString()));
+        var card = Instantiate(Resources.Load("Prefabs/" + any.ToString()));
         _cards.RemoveAt(any);
     }
 
