@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -14,6 +12,8 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject _handsLeft;
     [SerializeField] private GameObject _handsTop;
     [SerializeField] private GameObject _handsRight;
+
+    [SerializeField] private GameObject _hand;
 
     private Vector3 _size;
     private byte _no;
@@ -134,6 +134,13 @@ public class NewBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         _total = 84;
         ShowHands();
+
+        var hand = Instantiate(_hand);
+        var handAnimation = hand.GetComponent<Animation>();
+        handAnimation.wrapMode = WrapMode.Once;
+        yield return new WaitForSeconds(handAnimation.clip.length);
+
+        Instantiate(_designTemplateSelf);
     }
 
     private void ShowHands()

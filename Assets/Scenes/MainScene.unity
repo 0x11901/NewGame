@@ -282,48 +282,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0129871fa8c4b6d9cf8799d68c85f6, type: 2}
   m_IsPrefabAsset: 0
---- !u!1001 &334179280
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.0898
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.036
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.164
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400038, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0c05a76ff9b44fc4ea4feeb211feed4c, type: 3}
-  m_IsPrefabAsset: 0
 --- !u!1 &504614935
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +530,7 @@ MonoBehaviour:
   _handsTop: {fileID: 1234238826395258, guid: 2273f79fd34e342a9b48aa2adc50884e, type: 2}
   _handsRight: {fileID: 1867034873880250, guid: 7ca62d105482b4672b342c5fde2767b3,
     type: 2}
+  _hand: {fileID: 1412626254106662, guid: f51bd5b142e7d49f29f7337f0abec05c, type: 2}
 --- !u!4 &810238386
 Transform:
   m_ObjectHideFlags: 0
