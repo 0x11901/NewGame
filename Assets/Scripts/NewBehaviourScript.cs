@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ public class NewBehaviourScript : MonoBehaviour
     private byte _no;
     private byte _total;
     private List<GameObject> _riverCard;
+    private List<byte> _cards;
 
     private Vector3 GetObjectSize(GameObject go)
     {
@@ -42,6 +44,15 @@ public class NewBehaviourScript : MonoBehaviour
         _total = 136;
         _no = 0;
         _riverCard = new List<GameObject>(120);
+        _cards = new List<byte>()
+        {
+            11, 12, 13, 14, 15, 16, 17, 18, 19, 11, 12, 13, 14, 15, 16, 17, 18, 19, 11, 12, 13, 14, 15, 16, 17, 18,
+            19, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 21, 22, 23, 24, 25, 26, 27,
+            28, 29, 21, 22, 23, 24, 25, 26, 27, 28, 29, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32, 33, 34, 35, 36,
+            37, 38, 39, 31, 32, 33, 34, 35, 36, 37, 38, 39, 31, 32, 33, 34, 35, 36, 37, 38, 39, 31, 32, 33, 34, 35,
+            36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 41, 42, 43, 44, 45, 46, 47, 41, 42, 43, 44,
+            45, 46, 47, 41, 42, 43, 44, 45, 46, 47
+        };
     }
 
     public void ShowRiver()
@@ -140,7 +151,11 @@ public class NewBehaviourScript : MonoBehaviour
         handAnimation.wrapMode = WrapMode.Once;
         yield return new WaitForSeconds(handAnimation.clip.length);
 
-        Instantiate(_designTemplateSelf);
+        var rand = new System.Random();
+        var index = rand.Next(_cards.Count);
+        var any = _cards[index];
+        var card = Instantiate(Resources.Load(any.ToString()));
+        _cards.RemoveAt(any);
     }
 
     private void ShowHands()
