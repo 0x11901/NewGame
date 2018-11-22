@@ -149,13 +149,25 @@ public class NewBehaviourScript : MonoBehaviour
         var hand = Instantiate(_hand);
         var handAnimation = hand.GetComponent<Animation>();
         handAnimation.wrapMode = WrapMode.Once;
-        yield return new WaitForSeconds(handAnimation.clip.length);
 
+        yield return Bar(new Vector3(-0.087f, 0.1117f, -0.0258f), new Quaternion(-0.052f, -0.142f, 177.683f, 0),
+            1.0f);
+
+        yield return new WaitForSeconds(handAnimation.clip.length);
+        Destroy(hand);
+    }
+
+    private IEnumerator Bar(Vector3 vector3, Quaternion quaternion, float dt)
+    {
         var rand = new System.Random();
         var index = rand.Next(_cards.Count);
         var any = _cards[index];
-        var card = Instantiate(Resources.Load("Prefabs/" + any.ToString()));
+        var card = Instantiate(Resources.Load("Prefabs/" + any.ToString()), vector3, quaternion) as GameObject;
+        if (card != null) card.SetActive(false);
         _cards.RemoveAt(any);
+
+        yield return new WaitForSeconds(dt);
+        if (card != null) card.SetActive(true);
     }
 
     private void ShowHands()
