@@ -149,6 +149,10 @@ public class NewBehaviourScript : MonoBehaviour
         var hand = Instantiate(_hand);
         var handAnimation = hand.GetComponent<Animation>();
         handAnimation.wrapMode = WrapMode.Once;
+        var t = hand.transform.position;
+        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
+
+        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
 
         yield return Bar(new Vector3(-0.087f, 0.1117f, -0.0258f), new Quaternion(-0.052f, -0.142f, 177.683f, 0),
             1.0f);
