@@ -154,7 +154,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
 
-        yield return Bar(new Vector3(-0.087f, 0.1117f, -0.0258f), new Quaternion(-0.052f, -0.142f, 177.683f, 0),
+        yield return Bar(v, new Quaternion(-0.052f, -0.142f, 177.683f, 0),
             1.0f);
 
         yield return new WaitForSeconds(handAnimation.clip.length);
