@@ -147,30 +147,49 @@ public class NewBehaviourScript : MonoBehaviour
         ShowHands();
 
         // self
-        var hand = Instantiate(_hand);
-        var handAnimation = hand.GetComponent<Animation>();
-        handAnimation.wrapMode = WrapMode.Once;
-        var t = hand.transform.position;
-        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
-
-        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
-
-        yield return Bar(v, new Quaternion(-0.052f, -0.142f, 177.683f, 0),
-            1.0f);
-
-        yield return new WaitForSeconds(handAnimation.clip.length);
-        Destroy(hand);
+//        var hand = Instantiate(_hand);
+//        var handAnimation = hand.GetComponent<Animation>();
+//        handAnimation.wrapMode = WrapMode.Once;
+//        var t = hand.transform.position;
+//        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
+//
+//        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
+//
+//        yield return Bar(v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)), 1.0f);
+//
+//        yield return new WaitForSeconds(handAnimation.clip.length);
+//        Destroy(hand);
 
         // left
-//        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), new Quaternion(0f, 90.0f, 0f, 0));
+//        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
 //
 //        var handAnimation = hand.GetComponent<Animation>();
 //        handAnimation.wrapMode = WrapMode.Once;
 //
-//        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f), new Quaternion(-0.052f, 89.858f, 177.683f, 0), 1.0f);
+//        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f),
+//            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
+
+        // top
+//        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
 //
-//        yield return new WaitForSeconds(handAnimation.clip.length);
-//        Destroy(hand);
+//        var handAnimation = hand.GetComponent<Animation>();
+//        handAnimation.wrapMode = WrapMode.Once;
+//
+//        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f),
+//            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
+
+        // right
+        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
+
+        var handAnimation = hand.GetComponent<Animation>();
+        handAnimation.wrapMode = WrapMode.Once;
+
+        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f),
+            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
+
+
+        yield return new WaitForSeconds(handAnimation.clip.length);
+        Destroy(hand);
     }
 
     private IEnumerator Bar(Vector3 vector3, Quaternion quaternion, float dt)
