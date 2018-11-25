@@ -175,6 +175,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private IEnumerator Play(Direction direction, byte card)
     {
+        --_total;
         switch (direction)
         {
             case Direction.Self:
@@ -204,8 +205,7 @@ public class NewBehaviourScript : MonoBehaviour
                 handAnimation3.wrapMode = WrapMode.Once;
 
                 var t3 = hand3.transform.position;
-                hand3.transform.position = new Vector3(t3.x - _size.x * (_tr % 6) + _size.x * _tr, t3.y,
-                    t3.z + _size.z * (_tr / 6));
+                hand3.transform.position = new Vector3(t3.x - _size.x * (_tr % 6), t3.y, t3.z + _size.z * (_tr / 6));
                 var v3 = new Vector3(0.153f - _size.x * (_tr % 6), 0.113f, 0.339f + _size.z * (_tr / 6));
                 ++_tr;
 
@@ -223,9 +223,8 @@ public class NewBehaviourScript : MonoBehaviour
                 handAnimation2.wrapMode = WrapMode.Once;
 
                 var t2 = hand2.transform.position;
-                hand2.transform.position = new Vector3(t2.x - _size.x * (_lr / 6) + _size.x * _lr, t2.y,
-                    t2.z - _size.z * (_lr % 6));
-                var v2 = new Vector3(-0.125f - _size.x * (_lr / 6), 0.111f, 0.261f - _size.z * (_lr % 6));
+                hand2.transform.position = new Vector3(t2.x - _size.x * (_lr / 6), t2.y, t2.z - _size.x * (_lr % 6));
+                var v2 = new Vector3(-0.125f - _size.x * (_lr / 6), 0.111f, 0.261f - _size.x * (_lr % 6));
                 ++_lr;
 
                 yield return Bar("Prefabs/" + card.ToString(), v2,
@@ -242,8 +241,8 @@ public class NewBehaviourScript : MonoBehaviour
                 handAnimation4.wrapMode = WrapMode.Once;
 
                 var t4 = hand4.transform.position;
-                hand4.transform.position = new Vector3(t4.x + _size.x * (_rr / 6), t4.y, t4.z + _size.y * (_rr % 6));
-                var v4 = new Vector3(0.215f + _size.x * (_rr / 6), 0.115f, 0.078f + _size.y * (_rr % 6));
+                hand4.transform.position = new Vector3(t4.x + _size.x * (_rr / 6), t4.y, t4.z + _size.x * (_rr % 6));
+                var v4 = new Vector3(0.215f + _size.x * (_rr / 6), 0.115f, 0.078f + _size.x * (_rr % 6));
                 ++_rr;
 
                 yield return Bar("Prefabs/" + card.ToString(), v4,
