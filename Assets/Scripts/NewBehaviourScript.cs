@@ -21,6 +21,10 @@ public class NewBehaviourScript : MonoBehaviour
     private byte _total;
     private List<GameObject> _riverCard;
     private List<byte> _cards;
+    private byte _lr;
+    private byte _tr;
+    private byte _rr;
+    private byte _sr;
 
     private Vector3 GetObjectSize(GameObject go)
     {
@@ -53,6 +57,10 @@ public class NewBehaviourScript : MonoBehaviour
             36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 41, 42, 43, 44, 45, 46, 47, 41, 42, 43, 44,
             45, 46, 47, 41, 42, 43, 44, 45, 46, 47
         };
+        _lr = 0;
+        _tr = 0;
+        _rr = 0;
+        _sr = 0;
     }
 
     public void ShowRiver()
@@ -146,19 +154,24 @@ public class NewBehaviourScript : MonoBehaviour
         _total = 84;
         ShowHands();
 
+        var rand = new System.Random();
+        var index = rand.Next(_cards.Count);
+        var any = _cards[index];
+
         // self
-//        var hand = Instantiate(_hand);
-//        var handAnimation = hand.GetComponent<Animation>();
-//        handAnimation.wrapMode = WrapMode.Once;
-//        var t = hand.transform.position;
-//        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
-//
-//        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
-//
-//        yield return Bar(v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)), 1.0f);
-//
-//        yield return new WaitForSeconds(handAnimation.clip.length);
-//        Destroy(hand);
+        var hand = Instantiate(_hand);
+        var handAnimation = hand.GetComponent<Animation>();
+        handAnimation.wrapMode = WrapMode.Once;
+        var t = hand.transform.position;
+        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
+
+        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
+
+        yield return Bar("Prefabs/" + any.ToString(), v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
+            1.0f);
+
+        yield return new WaitForSeconds(handAnimation.clip.length);
+        Destroy(hand);
 
         // left
 //        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
@@ -170,14 +183,14 @@ public class NewBehaviourScript : MonoBehaviour
 //            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
 
         // top
-        var hand = Instantiate(_hand, new Vector3(0.139f, 0.036f, 0.152f),
-            Quaternion.Euler(new Vector3(0f, 180.0f, 0f)));
-
-        var handAnimation = hand.GetComponent<Animation>();
-        handAnimation.wrapMode = WrapMode.Once;
-
-        yield return Bar(new Vector3(0.153f, 0.113f, 0.339f),
-            Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)), 1.0f);
+//        var hand = Instantiate(_hand, new Vector3(0.139f, 0.036f, 0.152f),
+//            Quaternion.Euler(new Vector3(0f, 180.0f, 0f)));
+//
+//        var handAnimation = hand.GetComponent<Animation>();
+//        handAnimation.wrapMode = WrapMode.Once;
+//
+//        yield return Bar(new Vector3(0.153f, 0.113f, 0.339f),
+//            Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)), 1.0f);
 
         // right
 //        var hand = Instantiate(_hand, new Vector3(0.048f, 0.036f, 0.071f),
@@ -189,19 +202,16 @@ public class NewBehaviourScript : MonoBehaviour
 //        yield return Bar(new Vector3(0.215f, 0.115f, 0.078f),
 //            Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)), 1.0f);
 
+        _cards.RemoveAt(any);
 
         yield return new WaitForSeconds(handAnimation.clip.length);
         Destroy(hand);
     }
 
-    private IEnumerator Bar(Vector3 vector3, Quaternion quaternion, float dt)
+    private IEnumerator Bar(string path, Vector3 vector3, Quaternion quaternion, float dt)
     {
-        var rand = new System.Random();
-        var index = rand.Next(_cards.Count);
-        var any = _cards[index];
-        var card = Instantiate(Resources.Load("Prefabs/" + any.ToString()), vector3, quaternion) as GameObject;
+        var card = Instantiate(Resources.Load(path), vector3, quaternion) as GameObject;
         if (card != null) card.SetActive(false);
-        _cards.RemoveAt(any);
 
         yield return new WaitForSeconds(dt);
         if (card != null) card.SetActive(true);
