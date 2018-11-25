@@ -162,13 +162,12 @@ public class NewBehaviourScript : MonoBehaviour
         Destroy(hand);
 
         // left
-//        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), new Quaternion(0f, 0.0f, 90f, 0));
+//        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), new Quaternion(0f, 90.0f, 0f, 0));
 //
 //        var handAnimation = hand.GetComponent<Animation>();
 //        handAnimation.wrapMode = WrapMode.Once;
 //
-//        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f), new Quaternion(-0.052f, 89.858f, 177.683f, 0),
-//            1.0f);
+//        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f), new Quaternion(-0.052f, 89.858f, 177.683f, 0), 1.0f);
 //
 //        yield return new WaitForSeconds(handAnimation.clip.length);
 //        Destroy(hand);
