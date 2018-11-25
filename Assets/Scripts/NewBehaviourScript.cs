@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    private enum Direction
+    {
+        Self,
+        Top,
+        Left,
+        Right
+    }
+
     [SerializeField] private GameObject _designTemplateLeft;
     [SerializeField] private GameObject _designTemplateTop;
     [SerializeField] private GameObject _designTemplateRight;
@@ -158,20 +166,11 @@ public class NewBehaviourScript : MonoBehaviour
         var index = rand.Next(_cards.Count);
         var any = _cards[index];
 
+
+        _cards.RemoveAt(any);
+
         // self
-        var hand = Instantiate(_hand);
-        var handAnimation = hand.GetComponent<Animation>();
-        handAnimation.wrapMode = WrapMode.Once;
-        var t = hand.transform.position;
-        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
 
-        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
-
-        yield return Bar("Prefabs/" + any.ToString(), v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
-            1.0f);
-
-        yield return new WaitForSeconds(handAnimation.clip.length);
-        Destroy(hand);
 
         // left
 //        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
@@ -201,14 +200,44 @@ public class NewBehaviourScript : MonoBehaviour
 //
 //        yield return Bar(new Vector3(0.215f, 0.115f, 0.078f),
 //            Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)), 1.0f);
+    }
 
-        _cards.RemoveAt(any);
+    private IEnumerable Play(Direction direction, byte card)
+    {
+        switch (direction)
+        {
+            case Direction.Self:
+                break;
+            case Direction.Top:
+                break;
+            case Direction.Left:
+                break;
+            case Direction.Right:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("direction", direction, null);
+        }
+
+        var hand = Instantiate(_hand);
+        var handAnimation = hand.GetComponent<Animation>();
+        handAnimation.wrapMode = WrapMode.Once;
+        var t = hand.transform.position;
+        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
+
+        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
+
+        yield return Bar("Prefabs/" + card.ToString(), v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
+            1.0f);
+
+        yield return new WaitForSeconds(handAnimation.clip.length);
+        Destroy(hand);
+
 
         yield return new WaitForSeconds(handAnimation.clip.length);
         Destroy(hand);
     }
 
-    private IEnumerator Bar(string path, Vector3 vector3, Quaternion quaternion, float dt)
+    private static IEnumerator Bar(string path, Vector3 vector3, Quaternion quaternion, float dt)
     {
         var card = Instantiate(Resources.Load(path), vector3, quaternion) as GameObject;
         if (card != null) card.SetActive(false);
