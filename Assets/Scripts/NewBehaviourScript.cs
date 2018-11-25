@@ -170,22 +170,24 @@ public class NewBehaviourScript : MonoBehaviour
 //            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
 
         // top
-//        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
-//
-//        var handAnimation = hand.GetComponent<Animation>();
-//        handAnimation.wrapMode = WrapMode.Once;
-//
-//        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f),
-//            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
-
-        // right
-        var hand = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f), Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
+        var hand = Instantiate(_hand, new Vector3(0.139f, 0.036f, 0.152f),
+            Quaternion.Euler(new Vector3(0f, 180.0f, 0f)));
 
         var handAnimation = hand.GetComponent<Animation>();
         handAnimation.wrapMode = WrapMode.Once;
 
-        yield return Bar(new Vector3(-0.125f, 0.111f, 0.261f),
-            Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
+        yield return Bar(new Vector3(0.153f, 0.113f, 0.339f),
+            Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)), 1.0f);
+
+        // right
+//        var hand = Instantiate(_hand, new Vector3(0.048f, 0.036f, 0.071f),
+//            Quaternion.Euler(new Vector3(0f, 270.0f, 0f)));
+//
+//        var handAnimation = hand.GetComponent<Animation>();
+//        handAnimation.wrapMode = WrapMode.Once;
+//
+//        yield return Bar(new Vector3(0.215f, 0.115f, 0.078f),
+//            Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)), 1.0f);
 
 
         yield return new WaitForSeconds(handAnimation.clip.length);
