@@ -207,34 +207,83 @@ public class NewBehaviourScript : MonoBehaviour
         switch (direction)
         {
             case Direction.Self:
+                var hand = Instantiate(_hand);
+                var handAnimation = hand.GetComponent<Animation>();
+                handAnimation.wrapMode = WrapMode.Once;
+                var t = hand.transform.position;
+                hand.transform.position = new Vector3(t.x + _size.x * (_sr % 6), t.y, t.z - _size.z * (_sr / 6));
+                var v = new Vector3(-0.087f + _size.x * (_sr % 6), 0.1117f, -0.0258f - _size.z * (_sr / 6));
+                ++_sr;
+
+                yield return Bar("Prefabs/" + card.ToString(), v,
+                    Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
+                    1.0f);
+
+                yield return new WaitForSeconds(handAnimation.clip.length);
+                Destroy(hand);
+
+                yield return new WaitForSeconds(handAnimation.clip.length);
+                Destroy(hand);
                 break;
             case Direction.Top:
+                var hand3 = Instantiate(_hand, new Vector3(0.139f, 0.036f, 0.152f),
+                    Quaternion.Euler(new Vector3(0f, 180.0f, 0f)));
+
+                var handAnimation3 = hand3.GetComponent<Animation>();
+                handAnimation3.wrapMode = WrapMode.Once;
+
+                var t3 = hand3.transform.position;
+                hand3.transform.position = new Vector3(t3.x - _size.x * (_tr % 6) + _size.x * _tr, t3.y,
+                    t3.z + _size.z * (_tr / 6));
+                var v3 = new Vector3(0.153f - _size.x * (_tr % 6), 0.113f, 0.339f + _size.z * (_tr / 6));
+                ++_tr;
+
+                yield return Bar("Prefabs/" + card.ToString(), v3,
+                    Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)), 1.0f);
+
+                yield return new WaitForSeconds(handAnimation3.clip.length);
+                Destroy(hand3);
                 break;
             case Direction.Left:
+                var hand2 = Instantiate(_hand, new Vector3(0.05f, 0.036f, 0.225f),
+                    Quaternion.Euler(new Vector3(0f, 90.0f, 0f)));
+
+                var handAnimation2 = hand2.GetComponent<Animation>();
+                handAnimation2.wrapMode = WrapMode.Once;
+
+                var t2 = hand2.transform.position;
+                hand2.transform.position = new Vector3(t2.x - _size.x * (_lr / 6) + _size.x * _lr, t2.y,
+                    t2.z - _size.z * (_lr % 6));
+                var v2 = new Vector3(-0.087f - _size.x * (_lr / 6), 0.1117f, -0.0258f - _size.z * (_lr % 6));
+                ++_lr;
+
+                yield return Bar("Prefabs/" + card.ToString(), v2,
+                    Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
+
+                yield return new WaitForSeconds(handAnimation2.clip.length);
+                Destroy(hand2);
                 break;
             case Direction.Right:
+                var hand4 = Instantiate(_hand, new Vector3(0.048f, 0.036f, 0.071f),
+                    Quaternion.Euler(new Vector3(0f, 270.0f, 0f)));
+
+                var handAnimation4 = hand4.GetComponent<Animation>();
+                handAnimation4.wrapMode = WrapMode.Once;
+
+                var t4 = hand4.transform.position;
+                hand4.transform.position = new Vector3(t4.x + _size.x * (_rr / 6), t4.y, t4.z + _size.z * (_rr % 6));
+                var v4 = new Vector3(0.215f + _size.x * (_rr / 6), 0.115f, 0.078f + _size.z * (_rr % 6));
+                ++_rr;
+
+                yield return Bar("Prefabs/" + card.ToString(), v4,
+                    Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)), 1.0f);
+
+                yield return new WaitForSeconds(handAnimation4.clip.length);
+                Destroy(hand4);
                 break;
             default:
                 throw new ArgumentOutOfRangeException("direction", direction, null);
         }
-
-        var hand = Instantiate(_hand);
-        var handAnimation = hand.GetComponent<Animation>();
-        handAnimation.wrapMode = WrapMode.Once;
-        var t = hand.transform.position;
-        hand.transform.position = new Vector3(t.x + _size.x, t.y, t.z);
-
-        var v = new Vector3(-0.087f + _size.x, 0.1117f, -0.0258f);
-
-        yield return Bar("Prefabs/" + card.ToString(), v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
-            1.0f);
-
-        yield return new WaitForSeconds(handAnimation.clip.length);
-        Destroy(hand);
-
-
-        yield return new WaitForSeconds(handAnimation.clip.length);
-        Destroy(hand);
     }
 
     private static IEnumerator Bar(string path, Vector3 vector3, Quaternion quaternion, float dt)
