@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject _handsRight;
 
     [SerializeField] private GameObject _hand;
+    [SerializeField] private GameObject _card;
+    [SerializeField] private GameObject _canvas;
 
     private Vector3 _size;
     private byte _no;
@@ -320,9 +323,32 @@ public class NewBehaviourScript : MonoBehaviour
             _hands.Add(_cards[index]);
             _cards.RemoveAt(index);
         }
+
         _hands.Sort();
+        for (var i = 0; i < 13; i++)
+        {
+            var c = Instantiate(_card);
+            c.transform.SetParent(_canvas.transform, false);
+            c.GetComponent<Image>().sprite = Resources.Load<Sprite>("card_big_" + _hands[i]);
+            var t = c.transform.position;
+            c.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
+        }
+    }
 
+    public void Up(GameObject go)
+    {
+        if (Math.Abs(go.transform.position.y) < 0.01)
+        {
+            var t = go.transform.position;
+            go.transform.position = new Vector3(t.x, t.y, t.z + 40);
+        }
+    }
 
+    /// <summary>
+    /// Override this method to make your own GUI for the decorator.
+    /// </summary>
+    private void OnGUI()
+    {
     }
 
     /// <summary>
