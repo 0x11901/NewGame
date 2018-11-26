@@ -231,8 +231,8 @@ public class NewBehaviourScript : MonoBehaviour
                 handAnimation2.wrapMode = WrapMode.Once;
 
                 var t2 = hand2.transform.position;
-                hand2.transform.position = new Vector3(t2.x - _size.x * (_lr / 6), t2.y, t2.z - _size.x * (_lr % 6));
-                var v2 = new Vector3(-0.125f - _size.x * (_lr / 6), 0.111f, 0.261f - _size.x * (_lr % 6));
+                hand2.transform.position = new Vector3(t2.x - _size.z * (_lr / 6), t2.y, t2.z - _size.x * (_lr % 6));
+                var v2 = new Vector3(-0.125f - _size.z * (_lr / 6), 0.111f, 0.261f - _size.x * (_lr % 6));
                 ++_lr;
 
                 yield return Bar("Prefabs/" + card.ToString(), v2,
@@ -249,8 +249,8 @@ public class NewBehaviourScript : MonoBehaviour
                 handAnimation4.wrapMode = WrapMode.Once;
 
                 var t4 = hand4.transform.position;
-                hand4.transform.position = new Vector3(t4.x + _size.x * (_rr / 6), t4.y, t4.z + _size.x * (_rr % 6));
-                var v4 = new Vector3(0.215f + _size.x * (_rr / 6), 0.115f, 0.078f + _size.x * (_rr % 6));
+                hand4.transform.position = new Vector3(t4.x + _size.z * (_rr / 6), t4.y, t4.z + _size.x * (_rr % 6));
+                var v4 = new Vector3(0.215f + _size.z * (_rr / 6), 0.115f, 0.078f + _size.x * (_rr % 6));
                 ++_rr;
 
                 yield return Bar("Prefabs/" + card.ToString(), v4,
@@ -361,9 +361,9 @@ public class NewBehaviourScript : MonoBehaviour
             foreach (var ho in _myHands)
             {
                 Destroy(ho);
-//                _myHands
             }
 
+            _myHands.Clear();
             _hands.Sort();
 
             for (var i = 0; i < 12; i++)
@@ -372,7 +372,7 @@ public class NewBehaviourScript : MonoBehaviour
                 card.transform.SetParent(_canvas.transform, false);
                 card.GetComponent<Image>().sprite = Resources.Load<Sprite>("card_big_" + _hands[i]);
                 card.name = _hands[i].ToString();
-                var t = c.transform.position;
+                var t = card.transform.position;
                 card.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
             }
         }
