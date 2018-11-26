@@ -174,15 +174,6 @@ public class NewBehaviourScript : MonoBehaviour
         _total = 84;
         ShowHands();
         ShowControl();
-        var d = new List<Direction>() {Direction.Self, Direction.Right, Direction.Top, Direction.Left};
-        for (var i = 0; i < 35; i++)
-        {
-            var index = _random.Next(_cards.Count);
-            var any = _cards[index];
-            StartCoroutine(Play(d[i % 4], any));
-            _cards.RemoveAt(any);
-            yield return new WaitForSeconds(1.5f);
-        }
     }
 
     private IEnumerator Play(Direction direction, byte card)
@@ -338,6 +329,24 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
+    private void ShowControl(byte nc)
+    {
+        _hands.Add(nc);
+        _hands.Sort();
+        for (var i = 0; i < 13; i++)
+        {
+            var c = Instantiate(_card);
+            c.transform.SetParent(_canvas.transform, false);
+            c.GetComponent<Image>().sprite = Resources.Load<Sprite>("card_big_" + _hands[i]);
+            c.name = _hands[i].ToString();
+            var t = c.transform.position;
+            c.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
+            var b = c.GetComponent<Button>();
+            b.onClick.AddListener(() => { Up(c); });
+            _myHands.Add(c);
+        }
+    }
+
     public void Up(GameObject go)
     {
         if (Math.Abs(go.transform.position.y) < 0.01)
@@ -354,7 +363,7 @@ public class NewBehaviourScript : MonoBehaviour
         else
         {
             var c = byte.Parse(go.name);
-            StartCoroutine(Play(Direction.Self, c));
+
             _cards.Remove(c);
             _hands.Remove(c);
             foreach (var ho in _myHands)
@@ -363,6 +372,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
 
             _myHands.Clear();
+
             _hands.Sort();
 
             for (var i = 0; i < 12; i++)
@@ -373,7 +383,38 @@ public class NewBehaviourScript : MonoBehaviour
                 card.name = _hands[i].ToString();
                 var t = card.transform.position;
                 card.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
+                _myHands.Add(card);
             }
+
+            StartCoroutine(Foobar(c));
+        }
+    }
+
+
+    private IEnumerator Foobar(byte c)
+    {
+        var d = new List<Direction>() {Direction.Self, Direction.Right, Direction.Top, Direction.Left};
+        for (var i = 0; i < 4; i++)
+        {
+            var index = _random.Next(_cards.Count);
+            var any = i == 0 ? c : _cards[index];
+            StartCoroutine(Play(d[i], any));
+            _cards.RemoveAt(any);
+            yield return new WaitForSeconds(1.5f);
+
+            if (i != 3) continue;
+
+            foreach (var ho in _myHands)
+            {
+                Destroy(ho);
+            }
+
+            _myHands.Clear();
+
+            var offset = _random.Next(_cards.Count);
+            var nc = _cards[offset];
+            _cards.RemoveAt(offset);
+            ShowControl(nc);
         }
     }
 
