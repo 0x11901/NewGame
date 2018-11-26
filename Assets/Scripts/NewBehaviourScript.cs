@@ -29,10 +29,13 @@ public class NewBehaviourScript : MonoBehaviour
     private byte _total;
     private List<GameObject> _riverCard;
     private List<byte> _cards;
+    private List<byte> _hands;
     private byte _lr;
     private byte _tr;
     private byte _rr;
     private byte _sr;
+
+    private System.Random _random;
 
     private Vector3 GetObjectSize(GameObject go)
     {
@@ -69,6 +72,9 @@ public class NewBehaviourScript : MonoBehaviour
         _tr = 0;
         _rr = 0;
         _sr = 0;
+
+        _random = new System.Random();
+        _hands = new List<byte>();
     }
 
     public void ShowRiver()
@@ -161,11 +167,10 @@ public class NewBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         _total = 84;
         ShowHands();
-        var rand = new System.Random();
         var d = new List<Direction>() {Direction.Self, Direction.Right, Direction.Top, Direction.Left};
         for (var i = 0; i < 35; i++)
         {
-            var index = rand.Next(_cards.Count);
+            var index = _random.Next(_cards.Count);
             var any = _cards[index];
             StartCoroutine(Play(d[i % 4], any));
             _cards.RemoveAt(any);
@@ -309,6 +314,15 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        for (var i = 0; i < 13; i++)
+        {
+            var index = _random.Next(0, _cards.Count);
+            _hands.Add(_cards[index]);
+            _cards.RemoveAt(index);
+        }
+        _hands.Sort();
+
+
     }
 
     /// <summary>
