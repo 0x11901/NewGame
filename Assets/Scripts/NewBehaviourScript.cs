@@ -354,7 +354,27 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Play(Direction.Self, byte.Parse(go.name)));
+            var c = byte.Parse(go.name);
+            StartCoroutine(Play(Direction.Self, c));
+            _cards.Remove(c);
+            _hands.Remove(c);
+            foreach (var ho in _myHands)
+            {
+                Destroy(ho);
+//                _myHands
+            }
+
+            _hands.Sort();
+
+            for (var i = 0; i < 12; i++)
+            {
+                var card = Instantiate(_card);
+                card.transform.SetParent(_canvas.transform, false);
+                card.GetComponent<Image>().sprite = Resources.Load<Sprite>("card_big_" + _hands[i]);
+                card.name = _hands[i].ToString();
+                var t = c.transform.position;
+                card.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
+            }
         }
     }
 
