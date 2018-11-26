@@ -173,6 +173,7 @@ public class NewBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         _total = 84;
         ShowHands();
+        ShowControl();
         var d = new List<Direction>() {Direction.Self, Direction.Right, Direction.Top, Direction.Left};
         for (var i = 0; i < 35; i++)
         {
@@ -312,10 +313,8 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Use this for initialization
-    /// </summary>
-    private void Start()
+
+    private void ShowControl()
     {
         for (var i = 0; i < 13; i++)
         {
@@ -376,6 +375,13 @@ public class NewBehaviourScript : MonoBehaviour
                 card.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
             }
         }
+    }
+
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    private void Start()
+    {
     }
 
     /// <summary>
