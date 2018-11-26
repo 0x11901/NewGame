@@ -38,6 +38,8 @@ public class NewBehaviourScript : MonoBehaviour
     private byte _rr;
     private byte _sr;
 
+    private List<GameObject> _myHands;
+
     private System.Random _random;
 
     private Vector3 GetObjectSize(GameObject go)
@@ -78,6 +80,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         _random = new System.Random();
         _hands = new List<byte>();
+        _myHands = new List<GameObject>();
     }
 
     public void ShowRiver()
@@ -198,9 +201,6 @@ public class NewBehaviourScript : MonoBehaviour
                 yield return Bar("Prefabs/" + card.ToString(), v,
                     Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
                     1.0f);
-
-                yield return new WaitForSeconds(handAnimation.clip.length);
-                Destroy(hand);
 
                 yield return new WaitForSeconds(handAnimation.clip.length);
                 Destroy(hand);
@@ -330,8 +330,12 @@ public class NewBehaviourScript : MonoBehaviour
             var c = Instantiate(_card);
             c.transform.SetParent(_canvas.transform, false);
             c.GetComponent<Image>().sprite = Resources.Load<Sprite>("card_big_" + _hands[i]);
+            c.name = _hands[i].ToString();
             var t = c.transform.position;
             c.transform.position = new Vector3(t.x + i * 87, t.y, t.z);
+            var b = c.GetComponent<Button>();
+            b.onClick.AddListener(() => { Up(c); });
+            _myHands.Add(c);
         }
     }
 
@@ -339,8 +343,18 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (Math.Abs(go.transform.position.y) < 0.01)
         {
+            foreach (var hand in _myHands)
+            {
+                var h = hand.transform.position;
+                hand.transform.position = new Vector3(h.x, 0, h.z);
+            }
+
             var t = go.transform.position;
-            go.transform.position = new Vector3(t.x, t.y, t.z + 40);
+            go.transform.position = new Vector3(t.x, t.y + 40, t.z);
+        }
+        else
+        {
+            StartCoroutine(Play(Direction.Self, byte.Parse(go.name)));
         }
     }
 
