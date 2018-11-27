@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private List<GameObject> _myHands;
 
-    private System.Random _random;
+    private Random _random;
 
     private Vector3 GetObjectSize(GameObject go)
     {
@@ -64,7 +65,7 @@ public class NewBehaviourScript : MonoBehaviour
         _total = 136;
         _no = 0;
         _riverCard = new List<GameObject>(120);
-        _cards = new List<byte>()
+        _cards = new List<byte>
         {
             11, 12, 13, 14, 15, 16, 17, 18, 19, 11, 12, 13, 14, 15, 16, 17, 18, 19, 11, 12, 13, 14, 15, 16, 17, 18,
             19, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 21, 22, 23, 24, 25, 26, 27,
@@ -78,7 +79,7 @@ public class NewBehaviourScript : MonoBehaviour
         _rr = 0;
         _sr = 0;
 
-        _random = new System.Random();
+        _random = new Random();
         _hands = new List<byte>();
         _myHands = new List<GameObject>();
     }
@@ -190,7 +191,7 @@ public class NewBehaviourScript : MonoBehaviour
                 var v = new Vector3(-0.087f + _size.x * (_sr % 6), 0.1117f, -0.0258f - _size.z * (_sr / 6));
                 ++_sr;
 
-                yield return Bar("Prefabs/" + card.ToString(), v,
+                yield return Bar("Prefabs/" + card, v,
                     Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
                     1.0f);
 
@@ -209,7 +210,7 @@ public class NewBehaviourScript : MonoBehaviour
                 var v3 = new Vector3(0.153f - _size.x * (_tr % 6), 0.113f, 0.339f + _size.z * (_tr / 6));
                 ++_tr;
 
-                yield return Bar("Prefabs/" + card.ToString(), v3,
+                yield return Bar("Prefabs/" + card, v3,
                     Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)), 1.0f);
 
                 yield return new WaitForSeconds(handAnimation3.clip.length);
@@ -227,7 +228,7 @@ public class NewBehaviourScript : MonoBehaviour
                 var v2 = new Vector3(-0.125f - _size.z * (_lr / 6), 0.111f, 0.261f - _size.x * (_lr % 6));
                 ++_lr;
 
-                yield return Bar("Prefabs/" + card.ToString(), v2,
+                yield return Bar("Prefabs/" + card, v2,
                     Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
 
                 yield return new WaitForSeconds(handAnimation2.clip.length);
@@ -245,7 +246,7 @@ public class NewBehaviourScript : MonoBehaviour
                 var v4 = new Vector3(0.215f + _size.z * (_rr / 6), 0.115f, 0.078f + _size.x * (_rr % 6));
                 ++_rr;
 
-                yield return Bar("Prefabs/" + card.ToString(), v4,
+                yield return Bar("Prefabs/" + card, v4,
                     Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)), 1.0f);
 
                 yield return new WaitForSeconds(handAnimation4.clip.length);
@@ -393,7 +394,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private IEnumerator Foobar(byte c)
     {
-        var d = new List<Direction>() {Direction.Self, Direction.Right, Direction.Top, Direction.Left};
+        var d = new List<Direction> {Direction.Self, Direction.Right, Direction.Top, Direction.Left};
         for (var i = 0; i < 4; i++)
         {
             var index = _random.Next(_cards.Count);
@@ -416,20 +417,6 @@ public class NewBehaviourScript : MonoBehaviour
             _cards.RemoveAt(offset);
             ShowControl(nc);
         }
-    }
-
-    /// <summary>
-    /// Use this for initialization
-    /// </summary>
-    private void Start()
-    {
-    }
-
-    /// <summary>
-    /// Override this method to make your own GUI for the decorator.
-    /// </summary>
-    private void OnGUI()
-    {
     }
 
     /// <summary>
