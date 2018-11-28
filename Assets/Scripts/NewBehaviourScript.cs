@@ -191,9 +191,7 @@ public class NewBehaviourScript : MonoBehaviour
                 var v = new Vector3(-0.087f + _size.x * (_sr % 6), 0.1117f, -0.0258f - _size.z * (_sr / 6));
                 ++_sr;
 
-                yield return Bar("Prefabs/" + card, v,
-                    Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)),
-                    1.0f);
+                yield return Bar("Prefabs/" + card, v, Quaternion.Euler(new Vector3(-0.052f, -0.142f, 177.683f)), 1.0f);
 
                 yield return new WaitForSeconds(handAnimation.clip.length);
                 Destroy(hand);
@@ -210,8 +208,8 @@ public class NewBehaviourScript : MonoBehaviour
                 var v3 = new Vector3(0.153f - _size.x * (_tr % 6), 0.113f, 0.339f + _size.z * (_tr / 6));
                 ++_tr;
 
-                yield return Bar("Prefabs/" + card, v3,
-                    Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)), 1.0f);
+                yield return Bar("Prefabs/" + card, v3, Quaternion.Euler(new Vector3(-0.052f, 179.858f, 177.683f)),
+                    1.0f);
 
                 yield return new WaitForSeconds(handAnimation3.clip.length);
                 Destroy(hand3);
@@ -228,8 +226,8 @@ public class NewBehaviourScript : MonoBehaviour
                 var v2 = new Vector3(-0.125f - _size.z * (_lr / 6), 0.111f, 0.261f - _size.x * (_lr % 6));
                 ++_lr;
 
-                yield return Bar("Prefabs/" + card, v2,
-                    Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)), 1.0f);
+                yield return Bar("Prefabs/" + card, v2, Quaternion.Euler(new Vector3(-0.052f, 89.858f, 177.683f)),
+                    1.0f);
 
                 yield return new WaitForSeconds(handAnimation2.clip.length);
                 Destroy(hand2);
@@ -246,8 +244,8 @@ public class NewBehaviourScript : MonoBehaviour
                 var v4 = new Vector3(0.215f + _size.z * (_rr / 6), 0.115f, 0.078f + _size.x * (_rr % 6));
                 ++_rr;
 
-                yield return Bar("Prefabs/" + card, v4,
-                    Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)), 1.0f);
+                yield return Bar("Prefabs/" + card, v4, Quaternion.Euler(new Vector3(-0.052f, 269.858f, 177.683f)),
+                    1.0f);
 
                 yield return new WaitForSeconds(handAnimation4.clip.length);
                 Destroy(hand4);
