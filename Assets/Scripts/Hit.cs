@@ -3,6 +3,7 @@
 public class Hit : MonoBehaviour
 {
     [SerializeField] private GameObject _box;
+    [SerializeField] private GameObject _bullet;
 
     // Use this for initialization
     private void Start()
@@ -20,5 +21,18 @@ public class Hit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Fire1"))
+        {
+            var mainCamera = Camera.main;
+            var bullet = Instantiate(_bullet);
+            bullet.transform.position = mainCamera.transform.position;
+
+            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                bullet.GetComponent<Rigidbody>().velocity = (hit.point - bullet.transform.position) * 10;
+            }
+        }
     }
 }

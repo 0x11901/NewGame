@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _box: {fileID: 1101491442823314, guid: 164391a2b306446a392b727d045796aa, type: 2}
+  _bullet: {fileID: 1448377112047850, guid: 8796772de43a844808464f1f8b91408d, type: 2}
 --- !u!4 &66214938
 Transform:
   m_ObjectHideFlags: 0
