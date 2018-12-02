@@ -4,6 +4,8 @@ public class Hit : MonoBehaviour
 {
     [SerializeField] private GameObject _box;
     [SerializeField] private GameObject _bullet;
+    [SerializeField] private Texture2D _cursor;
+
 
     private float _cd;
     private float _margin;
@@ -13,6 +15,8 @@ public class Hit : MonoBehaviour
     {
         _cd = 0.5f;
         _margin = 0.5f;
+
+        Cursor.SetCursor(_cursor, new Vector2(_cursor.width / 2f, _cursor.height / 2f), CursorMode.Auto);
 
         for (var i = 0; i < 5; i++)
         {
