@@ -6,7 +6,6 @@ public class Hit : MonoBehaviour
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Texture2D _cursor;
 
-
     private float _cd;
     private float _margin;
 
