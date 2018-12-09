@@ -6,7 +6,7 @@ internal class Test : MonoBehaviour
 
     private void Start()
     {
-        _speed = 1f;
+        _speed = 50f;
     }
 
     public void Update()
