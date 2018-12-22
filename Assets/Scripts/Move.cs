@@ -10,7 +10,7 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _speed = 1f;
+        _speed = 2.618f;
     }
 
     // Update is called once per frame
@@ -18,20 +18,20 @@ public class Move : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") > 0)
         {
-            this.transform.Translate(Vector3.right * _speed * Time.deltaTime);
+            transform.Translate(Vector3.right * _speed * Time.deltaTime);
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            this.transform.Translate(Vector3.left * _speed * Time.deltaTime);
+            transform.Translate(Vector3.left * _speed * Time.deltaTime);
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
-            this.transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
-            this.transform.Translate(Vector3.back * _speed * Time.deltaTime);
+            transform.Translate(Vector3.back * _speed * Time.deltaTime);
         }
 
         if (Input.GetButton("Fire1"))
