@@ -3,41 +3,50 @@
 public class Move : MonoBehaviour
 {
     [SerializeField] private GameObject hero;
-    private float _speed;
+    private const float Speed = 2.618f;
+    private Animator _animator;
+    private static readonly int IsWalk = Animator.StringToHash("isWalk");
 
     #region Unity
 
     // Start is called before the first frame update
     private void Start()
     {
-        _speed = 2.618f;
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        var isWalk = false;
         if (Input.GetAxis("Horizontal") > 0)
         {
-            transform.Translate(Vector3.right * _speed * Time.deltaTime);
+            transform.Translate(Vector3.right * Speed * Time.deltaTime);
+            isWalk = true;
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            transform.Translate(Vector3.left * _speed * Time.deltaTime);
+            transform.Translate(Vector3.left * Speed * Time.deltaTime);
+            isWalk = true;
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
-            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            isWalk = true;
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
-            transform.Translate(Vector3.back * _speed * Time.deltaTime);
+            transform.Translate(Vector3.back * Speed * Time.deltaTime);
+            isWalk = true;
         }
 
         if (Input.GetButton("Fire1"))
         {
             print("fire!!!");
         }
+
+        _animator.SetBool(IsWalk, isWalk);
     }
 
     #endregion
