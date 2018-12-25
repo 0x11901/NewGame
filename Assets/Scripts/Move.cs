@@ -41,6 +41,26 @@ public class Move : MonoBehaviour
             isWalk = true;
         }
 
+        // var mainCamera = Camera.main;
+        // if (mainCamera != null)
+        // {
+        //     var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        // }
+
+        // RaycastHit hit;
+
+        // if(Physics.Raycast (camRay, out floorHit, camRayLength, floorMask))
+        // {
+        //     Vector3 playerToMouse = floorHit.point - transform.position;
+        //
+        //     playerToMouse.y = 0f;
+        //
+        //     Quaternion newRotatation = Quaternion.LookRotation (playerToMouse);
+        //
+        //     playerRigidbody.MoveRotation (newRotatation);
+        // }
+ 
+        
         if (Input.GetButton("Fire1"))
         {
             print("fire!!!");
