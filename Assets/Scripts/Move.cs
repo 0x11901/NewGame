@@ -4,8 +4,9 @@ public class Move : MonoBehaviour
 {
     [SerializeField] private GameObject hero;
     private const float Speed = 2.618f;
-    private Animator _animator;
     private static readonly int IsWalk = Animator.StringToHash("isWalk");
+    private Animator _animator;
+    private Camera _mainCamera;
 
     #region Unity
 
@@ -13,6 +14,7 @@ public class Move : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -41,26 +43,17 @@ public class Move : MonoBehaviour
             isWalk = true;
         }
 
-        // var mainCamera = Camera.main;
-        // if (mainCamera != null)
-        // {
-        //     var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        // }
 
-        // RaycastHit hit;
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        // if(Physics.Raycast (camRay, out floorHit, camRayLength, floorMask))
-        // {
-        //     Vector3 playerToMouse = floorHit.point - transform.position;
-        //
-        //     playerToMouse.y = 0f;
-        //
-        //     Quaternion newRotatation = Quaternion.LookRotation (playerToMouse);
-        //
-        //     playerRigidbody.MoveRotation (newRotatation);
-        // }
- 
-        
+        if (Physics.Raycast(ray, out var hit))
+        {
+            var vector = hit.point - transform.position;
+            vector.y = 0f;
+            transform.LookAt(vector);
+        }
+
+
         if (Input.GetButton("Fire1"))
         {
             print("fire!!!");
