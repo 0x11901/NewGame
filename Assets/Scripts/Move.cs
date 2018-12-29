@@ -21,25 +21,26 @@ public class Move : MonoBehaviour
     private void Update()
     {
         var isWalk = false;
+
         if (Input.GetAxis("Horizontal") > 0)
         {
-            transform.Translate(Vector3.left * Speed * Time.deltaTime);
+            transform.Translate(Vector3.right * Speed * Time.deltaTime);
             isWalk = true;
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            transform.Translate(Vector3.right * Speed * Time.deltaTime);
+            transform.Translate(Vector3.left * Speed * Time.deltaTime);
             isWalk = true;
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
-            transform.Translate(Vector3.back * Speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
             isWalk = true;
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
-            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            transform.Translate(Vector3.back * Speed * Time.deltaTime);
             isWalk = true;
         }
 
