@@ -2,13 +2,20 @@
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] private GameObject hero;
     private const float Speed = 2.618f;
     private static readonly int IsWalk = Animator.StringToHash("isWalk");
     private Animator _animator;
     private Camera _mainCamera;
 
+    private const float RayLength = 100f;
+    private LayerMask _floorMask;
+
     #region Unity
+
+    private void Awake()
+    {
+        _floorMask = LayerMask.GetMask("Floor");
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -44,23 +51,26 @@ public class Move : MonoBehaviour
             isWalk = true;
         }
 
-
-        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out var hit))
-        {
-            var vector = hit.point - transform.position;
-            vector.y = 0f;
-            transform.LookAt(vector);
-        }
-
-
         if (Input.GetButton("Fire1"))
         {
             print("fire!!!");
         }
 
         _animator.SetBool(IsWalk, isWalk);
+    }
+
+    private void FixedUpdate()
+    {
+        TurningWithMouse();
+    }
+
+    private void TurningWithMouse()
+    {
+        var camRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(camRay, out var floorHit, RayLength, _floorMask)) return;
+        var target = floorHit.point;
+        target.y = transform.position.y;
+        transform.LookAt(target);
     }
 
     #endregion
