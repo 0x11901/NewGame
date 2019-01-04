@@ -11,16 +11,13 @@ namespace Player
 
         [Header("Spawner Settings")] public GameObject projectilePrefab;
         public Transform spawnPoint;
-
         public float spawnRate;
+        public int spreadAmount;
         private float timer;
-
 
         [Header("Particles")] public ParticleSystem spawnParticles;
 
-
         [Header("Audio")] public AudioSource spawnAudioSource;
-
 
         private void Update()
         {
@@ -36,7 +33,15 @@ namespace Player
         private void SpawnProjectile()
         {
             timer = 0f;
-            Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+            var rotation = spawnPoint.rotation;
+
+            if (spreadShot)
+            {
+            }
+            else
+            {
+                SpawnBullet(rotation);
+            }
 
             if (spawnParticles)
             {
@@ -47,6 +52,15 @@ namespace Player
             {
                 spawnAudioSource.Play();
             }
+        }
+
+        private void SpawnBullet(Quaternion rotation)
+        {
+            Instantiate(projectilePrefab, spawnPoint.position, rotation);
+        }
+
+        private void SpawnBulletSpread(Quaternion rotation)
+        {
         }
     }
 }
