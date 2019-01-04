@@ -33,10 +33,11 @@ namespace Player
         private void SpawnProjectile()
         {
             timer = 0f;
-            var rotation = spawnPoint.rotation;
+            var rotation = spawnPoint.eulerAngles;
 
             if (spreadShot)
             {
+                SpawnBulletSpread(rotation);
             }
             else
             {
@@ -54,13 +55,27 @@ namespace Player
             }
         }
 
-        private void SpawnBullet(Quaternion rotation)
+        private void SpawnBullet(Vector3 rotation)
         {
-            Instantiate(projectilePrefab, spawnPoint.position, rotation);
+            Instantiate(projectilePrefab, spawnPoint.position, Quaternion.Euler(rotation));
         }
 
-        private void SpawnBulletSpread(Quaternion rotation)
+        private void SpawnBulletSpread(Vector3 rotation)
         {
+            var max = spreadAmount / 2;
+            var min = -max;
+            var tempRotation = rotation;
+            for (var x = min; x < max; ++x)
+            {
+                tempRotation.x = (rotation.x + 3 * x) % 360;
+
+                for (var y = min; y < max; ++y)
+                {
+                    tempRotation.y = (rotation.y + 3 * y) % 360;
+
+                    Instantiate(projectilePrefab, spawnPoint.position, Quaternion.Euler(tempRotation));
+                }
+            }
         }
     }
 }
