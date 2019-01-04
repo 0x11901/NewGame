@@ -1,59 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerProjectileSpawner : MonoBehaviour {
+namespace Player
+{
+    public class PlayerProjectileSpawner : MonoBehaviour
+    {
+        [SerializeField] private bool useEcs;
+        [SerializeField] private bool spreadShot;
 
+        [Header("Input")] public KeyCode spawnKey = KeyCode.Mouse0;
 
-	[Header("Input")]
-	public KeyCode spawnKey = KeyCode.Mouse0;
+        [Header("Spawner Settings")] public GameObject projectilePrefab;
+        public Transform spawnPoint;
 
-
-	[Header("Spawner Settings")]
-	public GameObject projectilePrefab;
-	public Transform spawnPoint;
-
-	public float spawnRate;
-	private float timer;
-
-
-	[Header("Particles")]
-	public ParticleSystem spawnParticles;
+        public float spawnRate;
+        private float timer;
 
 
-	[Header("Audio")]
-	public AudioSource spawnAudioSource;
+        [Header("Particles")] public ParticleSystem spawnParticles;
 
 
-	
-	void Update()
-	{
+        [Header("Audio")] public AudioSource spawnAudioSource;
 
-		timer += Time.deltaTime;
 
-		if(Input.GetKey(spawnKey) && timer >= spawnRate)
-		{
-			SpawnProjectile();
-		}
+        private void Update()
+        {
+            timer += Time.deltaTime;
 
-	}
-	
+            if (Input.GetKey(spawnKey) && timer >= spawnRate)
+            {
+                SpawnProjectile();
+            }
+        }
 
-	void SpawnProjectile()
-	{
-		timer = 0f;
-		Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
 
-		if(spawnParticles)
-		{
-			spawnParticles.Play();
-		}
+        private void SpawnProjectile()
+        {
+            timer = 0f;
+            Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
 
-		if(spawnAudioSource)
-		{
-			spawnAudioSource.Play();
-		}
+            if (spawnParticles)
+            {
+                spawnParticles.Play();
+            }
 
-	}
-
+            if (spawnAudioSource)
+            {
+                spawnAudioSource.Play();
+            }
+        }
+    }
 }
