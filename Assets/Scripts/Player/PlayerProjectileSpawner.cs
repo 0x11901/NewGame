@@ -35,14 +35,29 @@ namespace Player
             timer = 0f;
             var rotation = spawnPoint.eulerAngles;
 
-            if (spreadShot)
+            if (useEcs)
             {
-                SpawnBulletSpread(rotation);
+                if (spreadShot)
+                {
+                    SpawnBulletSpreadEcs(rotation);
+                }
+                else
+                {
+                    SpawnBulletEcs(rotation);
+                }
             }
             else
             {
-                SpawnBullet(rotation);
+                if (spreadShot)
+                {
+                    SpawnBulletSpread(rotation);
+                }
+                else
+                {
+                    SpawnBullet(rotation);
+                }
             }
+
 
             if (spawnParticles)
             {
@@ -74,6 +89,28 @@ namespace Player
                     tempRotation.y = (rotation.y + 3 * y) % 360;
 
                     Instantiate(projectilePrefab, spawnPoint.position, Quaternion.Euler(tempRotation));
+                }
+            }
+        }
+
+        private void SpawnBulletEcs(Vector3 rotation)
+        {
+            // EntityManager manager = World
+        }
+
+        private void SpawnBulletSpreadEcs(Vector3 rotation)
+        {
+            var max = spreadAmount / 2;
+            var min = -max;
+            var tempRotation = rotation;
+            for (var x = min; x < max; ++x)
+            {
+                tempRotation.x = (rotation.x + 3 * x) % 360;
+
+                for (var y = min; y < max; ++y)
+                {
+                    tempRotation.y = (rotation.y + 3 * y) % 360;
+                    //TODO: ecs
                 }
             }
         }
