@@ -10,8 +10,10 @@ namespace Player
 
         [Header("Input")] public KeyCode spawnKey = KeyCode.Mouse0;
 
-        [Header("Spawner Settings")] public GameObject projectilePrefab;
-        public Transform spawnPoint;
+        [Header("Bullets")] public GameObject bulletPrefabGo;
+        public GameObject bulletPrefabEcs;
+
+        [Header("Spawner Settings")] public Transform spawnPoint;
         public float spawnRate;
         public int spreadAmount;
         private float timer;
