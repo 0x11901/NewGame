@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Unity.Entities;
 
 namespace Player
 {
@@ -95,7 +96,8 @@ namespace Player
 
         private void SpawnBulletEcs(Vector3 rotation)
         {
-            // EntityManager manager = World
+            var manager = World.Active.GetOrCreateManager<EntityManager>();
+            // var bullet = manager.Instantiate();
         }
 
         private void SpawnBulletSpreadEcs(Vector3 rotation)
