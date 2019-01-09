@@ -99,9 +99,8 @@ namespace Player
         private void SpawnBulletEcs(Vector3 rotation)
         {
             var manager = World.Active.GetOrCreateManager<EntityManager>();
-            var bullet = manager.Instantiate(projectilePrefabEcs);
             
-            // Instantiate(projectilePrefab, spawnPoint.position, Quaternion.Euler(rotation));
+            var bullet = manager.Instantiate(projectilePrefabEcs);
             manager.SetComponentData(bullet, new Position {Value = spawnPoint.position});
             manager.SetComponentData(bullet, new Rotation {Value = Quaternion.Euler(rotation)});
         }
