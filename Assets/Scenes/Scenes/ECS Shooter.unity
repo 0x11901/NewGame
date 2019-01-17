@@ -1787,6 +1787,12 @@ PrefabInstance:
       propertyPath: spreadAmount
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4977531690419389660, guid: bfe5fb299aa28b6469d665745ad07a23,
+        type: 3}
+      propertyPath: projectilePrefabEcs
+      value: 
+      objectReference: {fileID: 1218724716591446, guid: d9b5fc55a78b74db19e7ceabe6c212e3,
+        type: 3}
     - target: {fileID: 860069947254954118, guid: bfe5fb299aa28b6469d665745ad07a23,
         type: 3}
       propertyPath: BypassEffects
