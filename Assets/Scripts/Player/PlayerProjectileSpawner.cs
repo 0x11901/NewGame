@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Unity.Entities;
+using Unity.Transforms;
 
 namespace Player
 {
@@ -10,10 +11,9 @@ namespace Player
 
         [Header("Input")] public KeyCode spawnKey = KeyCode.Mouse0;
 
-        [Header("Bullets")] public GameObject bulletPrefabGo;
-        public GameObject bulletPrefabEcs;
-
-        [Header("Spawner Settings")] public Transform spawnPoint;
+        [Header("Spawner Settings")] public GameObject projectilePrefab;
+        public GameObject projectilePrefabEcs;
+        public Transform spawnPoint;
         public float spawnRate;
         public int spreadAmount;
         private float timer;
@@ -99,7 +99,11 @@ namespace Player
         private void SpawnBulletEcs(Vector3 rotation)
         {
             var manager = World.Active.GetOrCreateManager<EntityManager>();
-            // var bullet = manager.Instantiate();
+            var bullet = manager.Instantiate(projectilePrefabEcs);
+            
+            // Instantiate(projectilePrefab, spawnPoint.position, Quaternion.Euler(rotation));
+            manager.SetComponentData(bullet, new Position {Value = spawnPoint.position});
+            manager.SetComponentData(bullet, new Rotation {Value = Quaternion.Euler(rotation)});
         }
 
         private void SpawnBulletSpreadEcs(Vector3 rotation)
